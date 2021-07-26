@@ -1,2 +1,6 @@
 node_modules
 dist
+
+// ENV Files
+.env
+.env.development
