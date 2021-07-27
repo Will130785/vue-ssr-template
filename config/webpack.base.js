@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const vueConfig = require('./vue-loader.config')
 // vue-loader allows us to render vue files
 const { VueLoaderPlugin } = require('vue-loader')
+const srcPath = path.resolve(process.cwd(), 'src')
 
 // Check if production
 const isProd = process.env.NODE_ENV === 'production'
@@ -39,7 +40,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: '[name].[ext]?[hash]'
+          name: '[name].[ext]?[hash]',
         }
       },
       {

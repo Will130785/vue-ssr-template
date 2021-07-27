@@ -4,11 +4,9 @@ const { merge } = require('webpack-merge')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const base = require('./webpack.base')
 const fs = require('fs')
-const path = `./config/example.env.js`
-// const DotEnv = require('dotenv-webpack')
-const env = fs.existsSync(`./config/${process.env.NODE_ENV}.env.js`) ? require(`./${process.env.NODE_ENV}.env`) : require('./example.env')
+// Set env file depending on NODE_ENV and set to empty {}  if no match
+const env = fs.existsSync(`./config/${process.env.NODE_ENV}.env.js`) ? require(`./${process.env.NODE_ENV}.env`) : {}
 const isProd = process.env.NODE_ENV === 'production'
-console.log(fs.existsSync(path))
 
 // Export config module
 const config = merge(base, {
@@ -51,8 +49,6 @@ const config = merge(base, {
       minChunks: Infinity
     }),
     new VueSSRClientPlugin()
-    // new DotEnv()
-    
   ]
 })
 module.exports = config
