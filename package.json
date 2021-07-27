@@ -9,7 +9,7 @@
     "build:client": "cross-env NODE_ENV=production webpack --config config/webpack.client.js --progress",
     "build:server": "cross-env NODE_ENV=production webpack --config config/webpack.server.js --progress",
     "start-server": "cross-env node server.js",
-    "prod-server": "cross-env NODE_ENV=production node server.js",
+    "prod-server": "cross-env NODE_ENV=production PORT=5000 node server.js",
     "deploy": "git push && git push heroku master"
   },
   "author": "Will Constable",

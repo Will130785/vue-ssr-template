@@ -6,15 +6,8 @@ const { createBundleRenderer } = require('vue-server-renderer')
 const setupDevServer = require('./config/setup-dev-server')
 const app = express()
 
-// Set .env file to use
-const { NODE_ENV } = process.env
-const dotEnvPath = NODE_ENV === 'production' ? '.env' : NODE_ENV && `.env.${NODE_ENV}`
-require('dotenv').config({
-  path: dotEnvPath
-})
-
 // Set port
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8080
 // Check if production
 const isProd = process.env.NODE_ENV === 'production'
 
