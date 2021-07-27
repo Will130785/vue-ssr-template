@@ -64,6 +64,7 @@ module.exports = function setupDevServer (app, templatePath, cb) {
   app.use(devMiddleware)
   clientCompiler.hooks.done.tap('done', stats => {
     stats = stats.toJson()
+    stats.errorDetails = true
     stats.errors.forEach(err => console.error(err))
     stats.warnings.forEach(err => console.warn(err))
     // If errors return

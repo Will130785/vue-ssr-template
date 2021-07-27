@@ -4,3 +4,5 @@ dist
 // ENV Files
 .env
 .env.development
+development.env.js
+production.env.js

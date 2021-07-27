@@ -3,6 +3,9 @@ const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const base = require('./webpack.base')
+// const DotEnv = require('dotenv-webpack')
+const env = require(`./${process.env.NODE_ENV}.env`)
+const isProd = process.env.NODE_ENV === 'production'
 
 // Export config module
 const config = merge(base, {
@@ -15,13 +18,16 @@ const config = merge(base, {
     //   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
     //   'process.env.VUE_ENV': '"client"'
     // }),
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+    //     VUE_ENV: '"client"',
+    //     VUE_APP_TEST: JSON.stringify(process.env.VUE_APP_TEST),
+    //     PORT: JSON.stringify(process.env.PORT)
+    //   }
+    // }),
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
-        VUE_ENV: '"client"',
-        VUE_APP_TEST: JSON.stringify(process.env.VUE_APP_TEST),
-        PORT: JSON.stringify(process.env.PORT)
-      }
+      'process.env': env
     }),
     // Extract vendor chunks for better caching
     new webpack.optimize.SplitChunksPlugin({
@@ -41,7 +47,8 @@ const config = merge(base, {
       name: 'manifest',
       minChunks: Infinity
     }),
-    new VueSSRClientPlugin(),
+    new VueSSRClientPlugin()
+    // new DotEnv()
     
   ]
 })
