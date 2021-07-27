@@ -3,9 +3,12 @@ const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const base = require('./webpack.base')
+const fs = require('fs')
+const path = `./config/example.env.js`
 // const DotEnv = require('dotenv-webpack')
-const env = require(`./${process.env.NODE_ENV}.env`)
+const env = fs.existsSync(`./config/${process.env.NODE_ENV}.env.js`) ? require(`./${process.env.NODE_ENV}.env`) : require('./example.env')
 const isProd = process.env.NODE_ENV === 'production'
+console.log(fs.existsSync(path))
 
 // Export config module
 const config = merge(base, {
