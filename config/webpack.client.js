@@ -11,9 +11,17 @@ const config = merge(base, {
   },
   plugins: [
     // Strip dev only code in Vue source
+    // new webpack.DefinePlugin({
+    //   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+    //   'process.env.VUE_ENV': '"client"'
+    // }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-      'process.env.VUE_ENV': '"client"'
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+        VUE_ENV: '"client"',
+        VUE_APP_TEST: JSON.stringify(process.env.VUE_APP_TEST),
+        PORT: JSON.stringify(process.env.PORT)
+      }
     }),
     // Extract vendor chunks for better caching
     new webpack.optimize.SplitChunksPlugin({
@@ -33,7 +41,8 @@ const config = merge(base, {
       name: 'manifest',
       minChunks: Infinity
     }),
-    new VueSSRClientPlugin()
+    new VueSSRClientPlugin(),
+    
   ]
 })
 module.exports = config

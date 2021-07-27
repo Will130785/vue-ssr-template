@@ -1,4 +1,5 @@
 import axios from 'axios'
+// console.log(process.env)
 
 export default () => {
   return axios.create({

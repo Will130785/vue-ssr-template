@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import testService from '../services/testService.js'
 export default {
   data() {
 	return {
@@ -21,9 +22,12 @@ export default {
   },
   created () {
 	console.log('created')
+  
   },
   mounted () {
 	console.log('mounted')
+  // testService()
+  console.log(process.env, "******")
   }
 }
 </script>
